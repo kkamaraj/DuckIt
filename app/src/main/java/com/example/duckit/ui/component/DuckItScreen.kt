@@ -12,7 +12,7 @@ fun DuckItScreen(
     duckItViewModel: DuckItViewModel = hiltViewModel()
 ) {
     duckItViewModel.initDuckItInfoList()
-    val duckItInfoList = remember { duckItViewModel.duckItInfoList }
+    val duckItInfoList = remember { duckItViewModel.duckItViewDataList }
     DuckItItemList(
         duckItInfoList = duckItInfoList,
         onUpvoteClick = {
