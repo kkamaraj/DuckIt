@@ -1,14 +1,14 @@
-#NameTag Android Project. 
+# NameTag Android Project. 
 Product spec: https://nametag.notion.site/DuckIt-Mobile-7ec55e5f16f44eafa9ca9c2f1e4ccba6
 
-##Introduction
+## Introduction
 
 
-##Project Screenshots
+## Project Screenshots
 
-##Architecture
+## Architecture
 
-##How to build
+## How to build
 
-##Questions
+## Questions
 Please contact the author [Karthik Kamaraj](karthik.kamaraj@gmail.com)
