@@ -12,6 +12,7 @@ fun DuckItItemList(
     onUpvoteClick: (String) -> Unit,
     onDownvoteClick: (String) -> Unit,
     modifier: Modifier = Modifier) {
+    if(duckItInfoList.isEmpty()) return
     LazyColumn(modifier = modifier) {
         items(items = duckItInfoList, key = { duckItInfo -> duckItInfo.id }) { duckItInfo ->
             DuckItItem(duckItInfo, onUpvoteClick, onDownvoteClick)

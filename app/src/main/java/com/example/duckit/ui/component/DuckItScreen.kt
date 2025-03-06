@@ -11,6 +11,7 @@ fun DuckItScreen(
     modifier: Modifier = Modifier,
     duckItViewModel: DuckItViewModel = hiltViewModel()
 ) {
+    duckItViewModel.initDuckItInfoList()
     val duckItInfoList = remember { duckItViewModel.duckItInfoList }
     DuckItItemList(
         duckItInfoList = duckItInfoList,
