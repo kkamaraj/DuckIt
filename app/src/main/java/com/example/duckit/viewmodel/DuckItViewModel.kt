@@ -1,5 +1,6 @@
 package com.example.duckit.viewmodel
 
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,27 +14,39 @@ import javax.inject.Inject
 class DuckItViewModel @Inject constructor(
     private val duckItRepository: DuckItRepository
 ): ViewModel() {
-    private val _duckItInfoList = emptyList<DuckItInfo>().toMutableStateList()
-    val duckItInfoList: List<DuckItInfo>
+    private val _duckItInfoList = emptyList<DuckItViewData>().toMutableStateList()
+    val duckItInfoList: List<DuckItViewData>
         get() = _duckItInfoList
 
     fun initDuckItInfoList() {
         viewModelScope.launch {
             _duckItInfoList.clear()
-            _duckItInfoList.addAll(duckItRepository.getDuckItInfo().toMutableStateList())
+            val duckItInfoList = duckItRepository.getDuckItInfo()
+            duckItInfoList.forEach {
+                _duckItInfoList.add(DuckItViewData(
+                    id = it.id,
+                    headline = it.headline,
+                    image = it.image,
+                    upvotes = if (it.upvotes > 0) {
+                        mutableIntStateOf(it.upvotes)
+                    } else {
+                        mutableIntStateOf(0)
+                    }
+                ))
+            }
         }
     }
 
     fun onUpvoteClick(id: String) {
         duckItInfoList.find { it.id == id }?. let {
-            it.upvotes += 1
+            it.upvotes.value += 1
         }
         // TODO call repository to update upvote count
     }
 
     fun onDownvoteClick(id: String) {
         duckItInfoList.find { it.id == id }?. let {
-            it.upvotes -= 1
+            it.upvotes.value -= 1
         }
         // TODO call repository to update upvote count
     }

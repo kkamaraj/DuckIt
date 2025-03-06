@@ -15,6 +15,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,11 +23,12 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.duckit.datamodel.DuckItInfo
+import com.example.duckit.viewmodel.DuckItViewData
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun DuckItItem(
-    duckItInfo: DuckItInfo,
+    duckItInfo: DuckItViewData,
     onUpvoteClick: (String) -> Unit,
     onDownvoteClick: (String) -> Unit,
     modifier: Modifier = Modifier) {
@@ -56,9 +58,9 @@ fun DuckItItem(
             ) {
                 Icon(Icons.Default.KeyboardArrowUp, contentDescription = null, tint = Color.Green)
             }
-            Text(text = duckItInfo.upvotes.toString())
+            Text(text = duckItInfo.upvotes.intValue.toString())
             IconButton(
-                enabled = duckItInfo.upvotes > 0,
+                enabled = duckItInfo.upvotes.intValue > 0,
                 onClick = { onDownvoteClick(duckItInfo.id) }
             ) {
                 Icon(Icons.Default.KeyboardArrowDown, contentDescription = null, tint = Color.Red)
@@ -66,15 +68,4 @@ fun DuckItItem(
         }
 
     }
-}
-
-@Preview
-@Composable
-private fun DuckItItemPreview() {
-    DuckItItem(DuckItInfo(
-        id = "Eg8KBFBvc3QQgICAuNPXhwo",
-        headline = "isaac toast",
-        image = "https://howtodrawforkids.com/wp-content/uploads/2024/10/Draw-a-duck-step-9.jpeg",
-        upvotes = 10
-    ), {}, {})
 }

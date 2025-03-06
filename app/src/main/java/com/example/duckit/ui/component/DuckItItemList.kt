@@ -4,11 +4,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.duckit.datamodel.DuckItInfo
+import com.example.duckit.viewmodel.DuckItViewData
 
 @Composable
 fun DuckItItemList(
-    duckItInfoList: List<DuckItInfo>,
+    duckItInfoList: List<DuckItViewData>,
     onUpvoteClick: (String) -> Unit,
     onDownvoteClick: (String) -> Unit,
     modifier: Modifier = Modifier) {
