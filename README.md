@@ -5,7 +5,8 @@ Product spec: https://nametag.notion.site/DuckIt-Mobile-7ec55e5f16f44eafa9ca9c2f
 This project implemented the DuckIt list for ducks. This project renders the list of ducks that shows photos of ducks and voting counts with option to upvote or downvote.
 
 ## Project Demo
-Demo video [./DuckIt_Demo.webm]
+Demo video 
+<video src='DuckIt_Demo.webm' width=180/>
 
 ## Architecture
 This project uses MVVM architecture pattern and uses Jetpak Compose for UI rendering. 
