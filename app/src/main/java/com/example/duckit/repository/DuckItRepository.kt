@@ -15,20 +15,21 @@ class DuckItRepository @Inject constructor(
     private val duckItApiService: DuckItApiService) {
 
     suspend fun getDuckItInfo(): Result<List<DuckItInfo>> {
-        val response = duckItApiService.getDuckItList(authToken = loginState.getAuthToken())
-        if(response.isSuccessful) {
-            return Result.success(response.body()?.posts ?: emptyList())
+        val authToken = loginState.getAuthToken()
+        val response = duckItApiService.getDuckItList(authToken = authToken?.let { "Bearer $it" })
+        return if(response.isSuccessful) {
+            Result.success(response.body()?.posts ?: emptyList())
         } else {
-            return Result.failure(Exception(response.errorBody()?.string()))
+            Result.failure(Exception(response.errorBody()?.string()))
         }
     }
 
-    suspend fun upvote(id: String) {
-        loginState.getAuthToken()?.let { duckItApiService.upVoteDuckItInfo(it, id) }
+    suspend fun upVote(id: String) {
+        loginState.getAuthToken()?.let { duckItApiService.upVoteDuckItInfo("Bearer $it", id) }
     }
 
-    suspend fun downvote(id: String) {
-        loginState.getAuthToken()?.let { duckItApiService.downVoteDuckItInfo(it, id) }
+    suspend fun downVote(id: String) {
+        loginState.getAuthToken()?.let { duckItApiService.downVoteDuckItInfo("Bearer $it", id) }
     }
 
     suspend fun login(username: String, password: String): Result<String?> {

@@ -17,4 +17,8 @@ class LoginStateImpl: LoginState {
     override fun setAuthToken(authToken: String) {
         _authToken = authToken
     }
+
+    override fun clearAuthToken() {
+        _authToken = null
+    }
 }

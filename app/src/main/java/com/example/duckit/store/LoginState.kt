@@ -6,4 +6,5 @@ interface LoginState {
     fun setEmail(email: String)
     fun getAuthToken(): String?
     fun setAuthToken(authToken: String)
+    fun clearAuthToken()
 }

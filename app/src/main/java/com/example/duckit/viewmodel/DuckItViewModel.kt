@@ -5,15 +5,17 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.duckit.repository.DuckItRepository
+import com.example.duckit.store.LoginState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DuckItViewModel @Inject constructor(
+    val loginState: LoginState,
     private val duckItRepository: DuckItRepository
 ): ViewModel() {
-    val _duckItViewDataList = emptyList<DuckItViewData>().toMutableStateList()
+    private val _duckItViewDataList = emptyList<DuckItViewData>().toMutableStateList()
     val duckItViewDataList: MutableList<DuckItViewData>
     get() = _duckItViewDataList
 
@@ -48,7 +50,7 @@ class DuckItViewModel @Inject constructor(
             it.upvotes.value += 1
         }
         viewModelScope.launch {
-            duckItRepository.upvote(id)
+            duckItRepository.upVote(id)
         }
     }
 
@@ -57,7 +59,7 @@ class DuckItViewModel @Inject constructor(
             it.upvotes.value -= 1
         }
         viewModelScope.launch {
-            duckItRepository.downvote(id)
+            duckItRepository.downVote(id)
         }
     }
 }

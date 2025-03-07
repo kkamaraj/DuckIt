@@ -19,16 +19,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.duckit.viewmodel.LoginViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreen(
     navController: NavController,
-    loginViewModel: LoginViewModel = hiltViewModel(),
-    modifier: Modifier = Modifier) {
+    modifier: Modifier = Modifier
+) {
     BasicAlertDialog(
         onDismissRequest = { /* Dismiss the dialog when the user clicks outside of it */ },
         content = {
@@ -48,7 +46,7 @@ fun SignUpScreen(
                         }) {
                             Text("Cancel")
                         }
-                        TextButton(onClick = { navController.navigate("signUp") }) {
+                        TextButton(onClick = { navController.navigate(Screen.SignUp.route) }) {
                             Text("Create Account")
                         }
                     }
@@ -104,6 +102,33 @@ fun SignUpErrorScreen(navController: NavController, modifier: Modifier = Modifie
                     Spacer(modifier.padding(8.dp))
                     TextButton(onClick = {
                         navController.navigateUp()
+                    }, modifier = modifier.align(Alignment.End)) {
+                        Text("Dismiss")
+                    }
+                }
+            }
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SignUpSuccessScreen(navController: NavController, modifier: Modifier = Modifier) {
+    BasicAlertDialog(
+        onDismissRequest = { /* Dismiss the dialog when the user clicks outside of it */ },
+        content = {
+            Surface(
+                modifier = modifier.padding(16.dp).fillMaxWidth(),
+                shape = MaterialTheme.shapes.large,
+                tonalElevation = AlertDialogDefaults.TonalElevation
+            ) {
+                Column(modifier = modifier.padding(8.dp)) {
+                    Text("Failed to create account", style = MaterialTheme.typography.titleLarge)
+                    Spacer(modifier.padding(8.dp))
+                    Text("Account is successfully created")
+                    Spacer(modifier.padding(8.dp))
+                    TextButton(onClick = {
+                        navController.navigate(Screen.Home.route)
                     }, modifier = modifier.align(Alignment.End)) {
                         Text("Dismiss")
                     }
