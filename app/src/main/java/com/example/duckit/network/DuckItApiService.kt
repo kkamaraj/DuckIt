@@ -2,9 +2,11 @@ package com.example.duckit.network
 
 import com.example.duckit.datamodel.AuthToken
 import com.example.duckit.datamodel.DuckItInfo
+import com.example.duckit.datamodel.LoginData
 import com.example.duckit.datamodel.Posts
 import com.example.duckit.datamodel.UpvoteCount
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -13,10 +15,10 @@ import retrofit2.http.Path
 interface DuckItApiService {
 
     @POST("signup")
-    suspend fun signUp(email: String, password: String): Response<AuthToken>
+    suspend fun signUp(@Body loginData: LoginData): Response<AuthToken>
 
     @POST("signin")
-    suspend fun login(email: String, password: String): Response<AuthToken>
+    suspend fun login(@Body loginData: LoginData): Response<AuthToken>
 
     @GET("posts")
     suspend fun getDuckItList(@Header("Authorization") authToken: String?): Response<Posts>

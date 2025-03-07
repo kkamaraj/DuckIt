@@ -1,6 +1,7 @@
 package com.example.duckit.repository
 
 import com.example.duckit.datamodel.DuckItInfo
+import com.example.duckit.datamodel.LoginData
 import com.example.duckit.network.DuckItApiService
 import com.example.duckit.store.LoginState
 import java.io.IOException
@@ -31,7 +32,7 @@ class DuckItRepository @Inject constructor(
     }
 
     suspend fun login(username: String, password: String): Result<String?> {
-        val response = duckItApiService.login(username, password)
+        val response = duckItApiService.login(LoginData(username, password))
         return if(response.isSuccessful) {
             Result.success(response.body()?.token)
         } else {
@@ -40,7 +41,7 @@ class DuckItRepository @Inject constructor(
     }
 
     suspend fun register(username: String, password: String): Result<String?> {
-        val response = duckItApiService.login(username, password)
+        val response = duckItApiService.signUp(LoginData(username, password))
         return if(response.isSuccessful) {
             Result.success(response.body()?.token)
         } else {

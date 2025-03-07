@@ -13,15 +13,18 @@ import javax.inject.Inject
 class DuckItViewModel @Inject constructor(
     private val duckItRepository: DuckItRepository
 ): ViewModel() {
-    val duckItViewDataList: MutableList<DuckItViewData> = emptyList<DuckItViewData>().toMutableStateList()
+    val _duckItViewDataList = emptyList<DuckItViewData>().toMutableStateList()
+    val duckItViewDataList: MutableList<DuckItViewData>
+    get() = _duckItViewDataList
 
     fun initDuckItInfoList() {
         viewModelScope.launch {
             val result = duckItRepository.getDuckItInfo()
             if(result.isSuccess) {
                 val duckItInfoList = result.getOrDefault(emptyList()).toMutableStateList()
+                _duckItViewDataList.clear()
                 duckItInfoList.forEach {
-                    duckItViewDataList.add(
+                    _duckItViewDataList.add(
                         DuckItViewData(
                             id = it.id,
                             headline = it.headline,
@@ -35,7 +38,7 @@ class DuckItViewModel @Inject constructor(
                     )
                 }
             } else {
-                duckItViewDataList.clear()
+                _duckItViewDataList.clear()
             }
         }
     }
@@ -44,13 +47,17 @@ class DuckItViewModel @Inject constructor(
         duckItViewDataList.find { it.id == id }?. let {
             it.upvotes.value += 1
         }
-        // TODO call repository to update upvote count
+        viewModelScope.launch {
+            duckItRepository.upvote(id)
+        }
     }
 
     fun onDownvoteClick(id: String) {
         duckItViewDataList.find { it.id == id }?. let {
             it.upvotes.value -= 1
         }
-        // TODO call repository to update upvote count
+        viewModelScope.launch {
+            duckItRepository.downvote(id)
+        }
     }
 }
