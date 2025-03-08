@@ -41,7 +41,7 @@ class LoginViewModel @Inject constructor(
             val result = duckItRepository.register(username, password)
             if(result.isSuccess) {
                 result.getOrNull()?.let { loginState.setAuthToken(it) }
-                navController.navigateUp()
+                navController.navigate(Screen.SignUpSuccessDialog.route)
             } else {
                 if (result.exceptionOrNull() is SignUpError) {
                   navController.navigate(Screen.SignUpErrorDialog.route)

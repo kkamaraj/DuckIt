@@ -31,7 +31,9 @@ fun SignUpScreen(
         onDismissRequest = { /* Dismiss the dialog when the user clicks outside of it */ },
         content = {
             Surface(
-                modifier = modifier.padding(16.dp).fillMaxWidth(),
+                modifier = modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
                 shape = MaterialTheme.shapes.large,
                 tonalElevation = AlertDialogDefaults.TonalElevation
             ) {
@@ -63,7 +65,9 @@ fun LoginErrorScreen(navController: NavController, modifier: Modifier = Modifier
         onDismissRequest = { /* Dismiss the dialog when the user clicks outside of it */ },
         content = {
             Surface(
-                modifier = modifier.padding(8.dp).fillMaxWidth(),
+                modifier = modifier
+                    .padding(8.dp)
+                    .fillMaxWidth(),
                 shape = MaterialTheme.shapes.large,
                 tonalElevation = AlertDialogDefaults.TonalElevation
             ) {
@@ -91,7 +95,9 @@ fun SignUpErrorScreen(navController: NavController, modifier: Modifier = Modifie
         onDismissRequest = { /* Dismiss the dialog when the user clicks outside of it */ },
         content = {
             Surface(
-                modifier = modifier.padding(16.dp).fillMaxWidth(),
+                modifier = modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
                 shape = MaterialTheme.shapes.large,
                 tonalElevation = AlertDialogDefaults.TonalElevation
             ) {
@@ -118,12 +124,14 @@ fun SignUpSuccessScreen(navController: NavController, modifier: Modifier = Modif
         onDismissRequest = { /* Dismiss the dialog when the user clicks outside of it */ },
         content = {
             Surface(
-                modifier = modifier.padding(16.dp).fillMaxWidth(),
+                modifier = modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
                 shape = MaterialTheme.shapes.large,
                 tonalElevation = AlertDialogDefaults.TonalElevation
             ) {
                 Column(modifier = modifier.padding(8.dp)) {
-                    Text("Failed to create account", style = MaterialTheme.typography.titleLarge)
+                    Text("Create account", style = MaterialTheme.typography.titleLarge)
                     Spacer(modifier.padding(8.dp))
                     Text("Account is successfully created")
                     Spacer(modifier.padding(8.dp))
@@ -154,4 +162,10 @@ private fun SignUpErrorScreenPreview() {
 @Composable
 private fun LoginErrorScreenPreview() {
     LoginErrorScreen(navController = NavController(LocalContext.current))
+}
+
+@Preview
+@Composable
+private fun SignUpSuccessScreenPreview() {
+    SignUpSuccessScreen(navController = NavController(LocalContext.current))
 }
