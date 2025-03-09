@@ -62,4 +62,10 @@ class DuckItViewModel @Inject constructor(
             duckItRepository.downVote(id)
         }
     }
+
+    fun onCreatePost(headline: String, imageUrl: String) {
+        viewModelScope.launch {
+            duckItRepository.createPost(headline, imageUrl)
+        }
+    }
 }

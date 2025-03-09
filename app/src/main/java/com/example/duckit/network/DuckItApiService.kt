@@ -1,7 +1,7 @@
 package com.example.duckit.network
 
 import com.example.duckit.datamodel.AuthToken
-import com.example.duckit.datamodel.DuckItInfo
+import com.example.duckit.datamodel.CreatePostRequest
 import com.example.duckit.datamodel.LoginData
 import com.example.duckit.datamodel.Posts
 import com.example.duckit.datamodel.UpvoteCount
@@ -30,5 +30,5 @@ interface DuckItApiService {
     suspend fun downVoteDuckItInfo(@Header("Authorization") authToken: String, @Path("id") id: String): Response<UpvoteCount>
 
     @POST("posts")
-    suspend fun createNewPost(@Header("Authorization") authToken: String, duckItInfo: DuckItInfo)
+    suspend fun createNewPost(@Header("Authorization") authToken: String, @Body createPostRequest: CreatePostRequest)
 }

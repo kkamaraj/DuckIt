@@ -15,6 +15,7 @@ sealed class Screen(val route: String) {
     data object Home : Screen("home")
     data object Login : Screen("login")
     data object SignUp : Screen("signUp")
+    data object CreatePost : Screen("signUp")
     data object RegisterDialog : Screen("register")
     data object LoginErrorDialog : Screen("loginError")
     data object SignUpSuccessDialog : Screen("signUpSuccess")
@@ -36,6 +37,7 @@ fun DuckItNavHost(navController: NavHostController) {
         composable(Screen.Home.route) { DuckItScreen(navController) }
         composable(Screen.Login.route) { LoginScreen(navController) }
         composable(Screen.SignUp.route) { LoginScreen(navController, isSignUp = true) }
+        composable(Screen.SignUp.route) { CreatePostScreen(navController) }
         dialog(Screen.RegisterDialog.route) { SignUpScreen(navController) }
         dialog(Screen.LoginErrorDialog.route) { LoginErrorScreen(navController) }
         dialog(Screen.SignUpSuccessDialog.route) { SignUpSuccessScreen(navController) }

@@ -1,5 +1,6 @@
 package com.example.duckit.repository
 
+import com.example.duckit.datamodel.CreatePostRequest
 import com.example.duckit.datamodel.DuckItInfo
 import com.example.duckit.datamodel.LoginData
 import com.example.duckit.network.DuckItApiService
@@ -47,6 +48,12 @@ class DuckItRepository @Inject constructor(
             Result.success(response.body()?.token)
         } else {
             Result.failure(SignUpError(response.code()))
+        }
+    }
+
+    suspend fun createPost(headline: String, imageUrl: String) {
+        loginState.getAuthToken()?.let {
+            duckItApiService.createNewPost("Bearer $it", CreatePostRequest(headline, imageUrl))
         }
     }
 }

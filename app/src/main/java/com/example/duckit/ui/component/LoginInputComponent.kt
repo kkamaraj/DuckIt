@@ -83,6 +83,6 @@ fun LoginInput(
 @Preview
 @Composable
 private fun LoginInputPreview() {
-    LoginInput(navController = NavController(LocalContext.current), onLoginAction = {_, _, _ -> }, onRegisterAction = {_, _, _ -> })
+    LoginInput(navController = NavController(LocalContext.current), onLoginAction = { _, _, _ -> }, onRegisterAction = { _, _, _ -> })
 
 }
