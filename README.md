@@ -10,11 +10,11 @@ Demo video DuckIt_Demo.webm
 ## Architecture
 This project uses MVVM architecture pattern and uses Jetpak Compose for UI rendering. 
 
-Libraries used:
-Architecture: MVVM with ViewModel and Jetpack Compose
-Repository pattern for business logic
-Retrofit for access to REST APIs
-Hilt for DI 
+1. Libraries used:
+2. Architecture: MVVM with ViewModel and Jetpack Compose
+3. Repository pattern for business logic
+4. Retrofit for access to REST APIs
+5. Hilt for DI 
 
 ## How to build
 The project could be checked-out from [this](https://github.com/kkamaraj/DuckIt) github repo. 
